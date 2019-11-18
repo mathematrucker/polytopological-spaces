@@ -1,7 +1,7 @@
 //
 //  Eliminate all inequalities not implied by Figure 2.
 //
-//  Mark Bowron, 17 Oct 2019.
+//  Mark Bowron, 18 Nov 2019.
 //
 
 #include	<stdio.h>
@@ -126,13 +126,13 @@ int main(int argc, const char **argv)
 	}
 
 	/*
-	 *	initialize q to empty set
+	 *	Initialize q[] to the empty set.
 	 */
 
 	for (i=0; i<13; i++) q[i] = 0;
 
 	/*
-	 *	initialize adj to zero matrix
+	 *	Initialize adj[][] to the zero matrix.
 	 */
 
 	for (i=0; i<60; i++)
@@ -140,13 +140,13 @@ int main(int argc, const char **argv)
 			adj[i][j] = 0;
 
 	/*
-	 *	add reflexivity
+	 *	Add reflexivity.
 	 */
 
 	for (i=0; i<60; i++) adj[i][i] = 1;
 
 	/*
-	 *	enter each arrow in Figure 2
+	 *	Enter each arrow in Figure 2.
 	 */
 
 	adj[Id][k1] = 1;
@@ -268,7 +268,7 @@ int main(int argc, const char **argv)
 	adj[k_2f_1k_2i_k_][k_2f_1k_2] = 1;
 
 	/*
-	 *	apply Floyd-Warshall to get the transitive closure of adj
+	 *	Apply Floyd-Warshall to get transitive closure of adj[][].
 	 */
 
 	for (k=0; k<60; k++)
@@ -277,14 +277,14 @@ int main(int argc, const char **argv)
 				adj[i][j] = adj[i][j] || (adj[i][k] && adj[k][j]);
 
 	/*
-	 *	exhaust power set of partition P to kill all inequalities one at a time
+	 *	Exhaust power set of partition $P$ to kill all inequalities, one at a time.
 	 */
 
 	for (i=0; i<exp_two[13]; i++)
 	{
 
 	/*
-	 *	reset all 60 subsets to the empty set at the start of each pass
+	 *	Reset all 60 subsets to the empty set at the start of each pass.
 	 */
 
 		for (j=0; j<60; j++)
@@ -292,13 +292,13 @@ int main(int argc, const char **argv)
 				p[j][k] = 0;
 
 	/*
-	 *	apply each operator in KF_2^0 to the seed i to generate 60 subsets
+	 *	Apply each operator in $KF_2^0$ to the seed i to generate 60 subsets.
 	 */
 
 		p = generate_subsets(i, p, q);
 
 	/*
-	 *	for each live inequality that gets killed we add a 1 to adj
+	 *	For each live inequality that gets killed, add a new "1" to adj[][].
 	 */
 
 		for (j=0; j<60; j++)
@@ -310,7 +310,8 @@ int main(int argc, const char **argv)
 	}
 
 	/*
-	 *	if adj is now all 1's then P worked - Figure 2 gives the partial order
+	 *	If adj[][] has no zero entries, then the partition $P$ has
+	 *	successfully verified the partial order displayed in Figure 2.
 	 */
 
 	int	success = 1;
