@@ -149,21 +149,21 @@ int main(int argc, const char **argv)
 	int	  		**adj, **p, *q;
 	int			i, j, k;
 
-	adj = (int **)malloc(120 * sizeof(int *));
+	adj = malloc(sizeof adj * 120);
 	if (adj==0)
 	{
 		printf("\nCould not allocate space for adj.\n");
 		exit(0);
 	}
 
-	p = (int **)malloc(120 * sizeof(int *));
+	p = malloc(sizeof p * 120);
 	if (p==0)
 	{
 		printf("\nCould not allocate space for p.\n");
 		exit(0);
 	}
 
-	q = (int *)malloc(13 * sizeof(int));
+	q = malloc(sizeof q * 13);
 	if (q==0)
 	{
 		printf("\nCould not allocate space for q.\n");
@@ -172,13 +172,13 @@ int main(int argc, const char **argv)
 
 	for (i=0; i<120; i++)
 	{
-		adj[i] = (int *)malloc(120 * sizeof(int));
+		adj[i] = malloc(sizeof adj[i] * 120);
 		if (adj[i]==0)
 		{
 			printf("\nCould not allocate space for adj[%d].\n", i);
 			exit(0);
 		}
-		p[i] = (int *)malloc(13 * sizeof(int));
+		p[i] = malloc(sizeof p[i] * 13);
 		if (p[i]==0)
 		{
 			printf("\nCould not allocate space for p[%d].\n", i);
