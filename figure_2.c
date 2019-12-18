@@ -88,21 +88,21 @@ int main(int argc, const char **argv)
 	int	  		**adj, **p, *q;
 	int			i, j, k;
 
-	adj = (int **)malloc(60 * sizeof(int *));
+	adj = malloc(sizeof adj * 60);
 	if (adj==0)
 	{
 		printf("\nCould not allocate space for adj.\n");
 		exit(0);
 	}
 
-	p = (int **)malloc(60 * sizeof(int *));
+	p = malloc(sizeof p * 60);
 	if (p==0)
 	{
 		printf("\nCould not allocate space for p.\n");
 		exit(0);
 	}
 
-	q = (int *)malloc(13 * sizeof(int));
+	q = malloc(sizeof q * 13);
 	if (q==0)
 	{
 		printf("\nCould not allocate space for q.\n");
@@ -111,13 +111,13 @@ int main(int argc, const char **argv)
 
 	for (i=0; i<60; i++)
 	{
-		adj[i] = (int *)malloc(60 * sizeof(int));
+		adj[i] = malloc(sizeof adj[i] * 60);
 		if (adj[i]==0)
 		{
 			printf("\nCould not allocate space for adj[%d].\n", i);
 			exit(0);
 		}
-		p[i] = (int *)malloc(13 * sizeof(int));
+		p[i] = malloc(sizeof p[i] * 13);
 		if (p[i]==0)
 		{
 			printf("\nCould not allocate space for p[%d].\n", i);
@@ -277,7 +277,7 @@ int main(int argc, const char **argv)
 				adj[i][j] = adj[i][j] || (adj[i][k] && adj[k][j]);
 
 	/*
-	 *	Exhaust power set of partition $P$ to kill all inequalities, one at a time.
+	 *	Exhaust power set of partition P to kill all inequalities, one at a time.
 	 */
 
 	for (i=0; i<exp_two[13]; i++)
@@ -292,7 +292,7 @@ int main(int argc, const char **argv)
 				p[j][k] = 0;
 
 	/*
-	 *	Apply each operator in $KF_2^0$ to the seed i to generate 60 subsets.
+	 *	Apply each operator in KF_2^0 to the seed i to generate 60 subsets.
 	 */
 
 		p = generate_subsets(i, p, q);
@@ -310,8 +310,8 @@ int main(int argc, const char **argv)
 	}
 
 	/*
-	 *	If adj[][] has no zero entries, then the partition $P$ has
-	 *	successfully verified the partial order displayed in Figure 2.
+	 *	If adj[][] has no zero entries, then the partition P
+	 *	successfully verifies the partial order displayed in Figure 2.
 	 */
 
 	int	success = 1;
@@ -323,7 +323,7 @@ int main(int argc, const char **argv)
 				printf("fail: %d %d\n", j, k);
 			}
 
-	if (success) printf("success");
+	if (success) printf("success\n");
 
 	for (i=0; i<60; i++)
 	{

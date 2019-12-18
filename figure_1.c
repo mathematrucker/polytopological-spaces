@@ -1,5 +1,5 @@
 //
-//  Verify partial order on $KF_1$.
+//  Eliminate all inequalities not implied by Figure 1.
 //
 //  Mark Bowron, 18 Nov 2019.
 //
@@ -57,21 +57,21 @@ int main(int argc, const char **argv)
 	int	  		**adj, **p, *q;
 	int			i, j, k;
 
-	adj = (int **)malloc(34 * sizeof(int *));
+	adj = malloc(sizeof adj * 34);
 	if (adj==0)
 	{
 		printf("\nCould not allocate space for adj.\n");
 		exit(0);
 	}
 
-	p = (int **)malloc(34 * sizeof(int *));
+	p = malloc(sizeof p * 34);
 	if (p==0)
 	{
 		printf("\nCould not allocate space for p.\n");
 		exit(0);
 	}
 
-	q = (int *)malloc(16 * sizeof(int));
+	q = malloc(sizeof q * 16);
 	if (q==0)
 	{
 		printf("\nCould not allocate space for q.\n");
@@ -80,13 +80,13 @@ int main(int argc, const char **argv)
 
 	for (i=0; i<34; i++)
 	{
-		adj[i] = (int *)malloc(34 * sizeof(int));
+		adj[i] = malloc(sizeof adj[i] * 34);
 		if (adj[i]==0)
 		{
 			printf("\nCould not allocate space for adj[%d].\n", i);
 			exit(0);
 		}
-		p[i] = (int *)malloc(16 * sizeof(int));
+		p[i] = malloc(sizeof p[i] * 16);
 		if (p[i]==0)
 		{
 			printf("\nCould not allocate space for p[%d].\n", i);
